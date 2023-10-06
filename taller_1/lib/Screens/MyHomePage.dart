@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:taller_1/localstorage/Sharepreference.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -8,7 +8,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return Scaffold( 
       appBar: AppBar(
         title: const Text(
           "Secun",
@@ -17,6 +17,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.blue ,
       ),
       body: SafeArea(
+      
         child: Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
