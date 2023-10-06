@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taller_1/Screens/MyHomePage.dart';
 import 'package:taller_1/localstorage/Sharepreference.dart';
 
 class Sesion extends StatefulWidget{
@@ -13,6 +14,7 @@ class _SesionState extends State<Sesion>{
   int _numero = 0;
   String _nombre = '';
   bool _ubi = false;
+  bool? _ch = false;
   late TextEditingController _textEditingController;
   final prefs = PrefernciaUsuario();
   
@@ -22,6 +24,7 @@ class _SesionState extends State<Sesion>{
     prefs.ultimapagina = Sesion.nombre;
     _numero = prefs.numero;
     _ubi = prefs.ubi;
+    _ch = prefs.ch;
     _textEditingController = TextEditingController(
       text: prefs.nombre
     );
@@ -32,7 +35,7 @@ class _SesionState extends State<Sesion>{
 
     return Scaffold(
       body:SafeArea(
-            child:ListView(
+            child:Column(
               children: [
                 Container(//LOGO
                   padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 10),                  
@@ -52,22 +55,6 @@ class _SesionState extends State<Sesion>{
                   margin: const EdgeInsets.symmetric(horizontal: 300,), 
                   height: 50,    
                   color: Colors.grey,
-                  child: Row(//NUMERO
-                    children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 17),
-                            child: const Text('+57'),
-                          ),
-                          Container(
-                              child: const Text('|', style: TextStyle(color: Colors.black, fontSize: 25.0),),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 300,), 
-                  height: 50,    
-                  color: Colors.grey,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     validator: (value){
@@ -81,17 +68,40 @@ class _SesionState extends State<Sesion>{
                       hintText: 'Escribe aqui tu numero'
                     ),
                   ),
-                ),
+                ),  
                   ],
                 ),
-                SwitchListTile(value: _ubi,
+                Container(
+                margin: const EdgeInsets.symmetric(horizontal: 300,),
+                child: SwitchListTile(value: _ubi,
                 title: const Text('Activar ubicacion', style: TextStyle(color: Colors.black)), 
                 onChanged: (value){
                   setState(() {
                     _ubi = value;
                     prefs.ubi = value;
                   });
-                })
+                }),
+                ),
+                Container(
+                margin: const EdgeInsets.symmetric(horizontal: 300,),
+                child: CheckboxListTile(value: _ch,
+                title: const Text('Acepto terminos y condiciones', style: TextStyle(color: Colors.black)), 
+                activeColor: Colors.blue,
+                onChanged: (value){
+                  setState(() {
+                    _ch = value;
+                  });
+                },
+                ),
+                ),
+                Container(
+                  child: ElevatedButton(child: Text('Confirmar ingreso', style: TextStyle(color: Colors.black)),
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => MyHomePage()));
+                  },
+                  ),
+                ),
               ],
             )  
       ),   

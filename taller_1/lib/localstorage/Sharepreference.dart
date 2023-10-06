@@ -11,6 +11,7 @@ class PrefernciaUsuario {
 
   late SharedPreferences _prefs;
 
+
   initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
   }
@@ -32,12 +33,21 @@ class PrefernciaUsuario {
   }
 
   set ubi(bool value) {
-    _prefs.setBool('numero', value);
+    _prefs.setBool('ubi', value);
   }
 
   bool get ubi{
     return _prefs.getBool('ubi') ?? false;
   }
+
+  set ch(bool value) {
+    _prefs.setBool('ch', value);
+  }
+
+  bool get ch{
+    return _prefs.getBool('ch') ?? false;
+  }
+  
   String get ultimapagina{
     return _prefs.getString('ultimapagina') ?? 'home';
   }
